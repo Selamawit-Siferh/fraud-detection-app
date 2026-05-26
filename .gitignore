@@ -1,0 +1,57 @@
+# Virtual Environment
+
+venv/
+env/
+
+# Python Cache
+
+**pycache**/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook Checkpoints
+
+.ipynb_checkpoints/
+
+# VS Code Settings
+
+.vscode/
+
+# Streamlit Cache
+
+.streamlit/
+
+# Dataset Files
+
+*.csv
+*.xlsx
+*.xls
+
+# Large ML Files (Optional)
+
+*.h5
+*.hdf5
+
+# OS Files
+
+.DS_Store
+Thumbs.db
+
+# Logs
+
+*.log
+
+# Environment Variables
+
+.env
+
+# Build Files
+
+build/
+dist/
+
+# Temporary Files
+
+temp/
+tmp/
