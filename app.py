@@ -44,7 +44,7 @@ def load_anomaly_bundle(selected_model_name):
 selected_model_option = st.selectbox(
     "Choose an Anomaly Detection Model:",
     ('DBSCAN', 'K-Means'),
-    index=0 # DBSCAN
+    index=0 # Default to DBSCAN
 )
 
 anomaly_model, preprocessor, numerical_features_saved, categorical_features_saved, kmeans_threshold = load_anomaly_bundle(selected_model_option)
@@ -111,6 +111,13 @@ if anomaly_model and preprocessor and numerical_features_saved is not None and c
                     st.error("⚠️ Suspicious Transaction Detected! (DBSCAN)")
                 else:
                     st.success("✅ Normal Transaction. (DBSCAN)")
+            else:
+                # For IsolationForest (predict -1 for anomalies)
+                pred_single = anomaly_model.predict(scaled_single)
+                if pred_single[0] == -1:
+                    st.error("⚠️ Suspicious Transaction Detected! (Isolation Forest)")
+                else:
+                    st.success("✅ Normal Transaction. (Isolation Forest)")
 
     st.markdown("--- ")
 
@@ -170,4 +177,4 @@ if anomaly_model and preprocessor and numerical_features_saved is not None and c
         num_suspicious = (df_uploaded["Anomaly_Prediction"] == "Suspicious").sum()
         st.info(f"Detected {num_suspicious} suspicious transactions out of {len(df_uploaded)} processed records.")
 else:
-    st.warning("Model could not be loaded. Please ensure the anomaly detection model is trained and saved in the notebook."a)
+    st.warning("Model could not be loaded. Please ensure the anomaly detection model is trained and saved in the notebook.")
