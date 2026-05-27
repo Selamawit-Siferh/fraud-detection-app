@@ -1,65 +1,303 @@
+# fraud-detection-app
+
+This project is a Machine Learning web application built using Streamlit for anomaly and suspicious transaction detection.
+
+The application allows users to:
+
+* Upload transaction datasets
+* Detect suspicious transactions
+* Visualize anomalies
+* Run predictions using trained ML models
+
+---
+
 # Project Setup and Running the Streamlit Application (Windows)
 
-This guide will walk you through setting up your local environment and running the Streamlit anomaly detection application on a Windows machine.
+This guide explains how to set up the project locally and run the Streamlit application on a Windows machine.
+
+---
 
 ## 1. Install Python
 
-If you don't already have Python installed, please download and install a stable version (e.g., Python 3.9 or newer) from the official Python website:
+Download and install Python from the official website:
 
-[Python for Windows](https://www.python.org/downloads/windows/)
+https://www.python.org/downloads/windows/
 
-**Important**: During the installation process, make sure to check the option that says "Add Python to PATH" or "Add Python to environment variables". This will allow you to run Python commands from any directory in your command prompt.
+Recommended version:
+
+* Python 3.9 or newer
+
+### Important
+
+During installation, make sure to check:
+
+Add Python to PATH
+
+This allows Python commands to work from any terminal window.
+
+---
 
 ## 2. Create a Virtual Environment (Recommended)
 
-Creating a virtual environment helps manage project dependencies by isolating them from your system's global Python packages. This prevents conflicts between different projects.
+Using a virtual environment helps isolate project dependencies and prevents conflicts with other Python projects.
 
-1.  **Open your Command Prompt (CMD) or PowerShell.**
-2.  **Navigate to your project directory.** This is the folder where your `app.py` file is located. For example, if your project is on your Desktop:
+### Step 1: Open Command Prompt or PowerShell
 
-    ```bash
-    cd C:\Users\Pc\Desktop\ML Assignment 2\
-    ```
+### Step 2: Navigate to the Project Folder
 
-3.  **Create a new virtual environment** named `venv` (you can choose another name if you prefer):
+Example:
 
-    ```bash
-    python -m venv venv
-    ```
+```bash
+cd C:\Users\Selamawitsiferh\Desktop\fraud-detection-app
+```
 
-4.  **Activate the virtual environment:**
+### Step 3: Create a Virtual Environment
 
-    ```bash
-    .\venv\Scripts\activate
-    ```
+```bash
+python -m venv venv
+```
 
-    You'll know the virtual environment is active when you see `(venv)` at the beginning of your command prompt line.
+### Step 4: Activate the Virtual Environment
+
+```bash
+.\venv\Scripts\activate
+```
+
+When activated, your terminal will display:
+
+```bash
+(venv)
+```
+
+---
 
 ## 3. Install Dependencies
 
-Now, install all the necessary Python libraries within your activated virtual environment. It's crucial to install `scikit-learn==1.6.1` to match the version used in the Colab notebook. This will resolve the `AttributeError` related to `_RemainderColsList` you might have encountered.
+Install all required Python libraries inside the activated virtual environment.
 
-Run the following commands one by one:
+### Required Packages
 
 ```bash
 pip install streamlit pandas numpy
 pip install scikit-learn==1.6.1
 ```
 
-## 4. Run the Streamlit Application
+### Optional Packages
 
-Once all dependencies are installed, you can launch your Streamlit application.
+```bash
+pip install matplotlib seaborn joblib
+```
 
-With your virtual environment still activated, run:
+### Why `scikit-learn==1.6.1`?
+
+Using the same Scikit-learn version as the training environment prevents compatibility errors such as:
+
+```text
+AttributeError: _RemainderColsList
+```
+
+---
+
+## 4. Create `requirements.txt`
+
+Create a file named:
+
+```text
+requirements.txt
+```
+
+Add the following:
+
+```txt
+streamlit
+pandas
+numpy
+scikit-learn==1.6.1
+matplotlib
+seaborn
+joblib
+```
+
+This file is required for deployment on Streamlit Cloud.
+
+---
+
+## 5. Run the Streamlit Application
+
+With the virtual environment activated, run:
 
 ```bash
 streamlit run app.py
 ```
 
 This command will:
-*   Start the Streamlit server.
-*   Open your default web browser to the application, usually at `http://localhost:8501`.
 
-If the browser doesn't open automatically, copy and paste `http://localhost:8501` into your web browser's address bar.
+* Start the Streamlit server
+* Open the application in your default browser
 
-Your Streamlit anomaly detection application should now be running locally!
+Default local URL:
+
+```text
+http://localhost:8501
+```
+
+If the browser does not open automatically, copy and paste the URL into your browser.
+
+---
+
+## 6. Project Structure
+
+```text
+ML Assignment 2/
+│── dbscan_model.pkl
+├── app.py
+├── kmeans_model.pkl
+├── requirements.txt
+├── README.md
+├── Trx_ML.csv
+└── Machine_Learning_Project.ipynb
+└── reports.ipynb
+
+
+```
+
+---
+
+# Uploading the Project to GitHub
+
+## 1. Create a GitHub Repository
+
+Create a repository on GitHub.
+
+Example repository name:
+
+```text
+streamlit-anomaly-detection
+```
+
+---
+
+## 2. Initialize Git
+
+Inside the project folder:
+
+```bash
+git init
+```
+
+---
+
+## 3. Add Files
+
+```bash
+git add .
+```
+
+---
+
+## 4. Commit Files
+
+```bash
+git commit -m "Initial commit"
+```
+
+---
+
+## 5. Connect the GitHub Repository
+
+Replace `YOUR_USERNAME` with your GitHub username:
+
+```bash
+git remote add origin https://github.com/Selamawit-Siferh/fraud-detection-app
+```
+
+---
+
+## 6. Push the Project to GitHub
+
+```bash
+git branch -M main
+git push -u origin main
+```
+
+The project is now uploaded to GitHub.
+
+---
+
+# Deploying the Application on Streamlit Cloud
+
+Go to:
+
+https://share.streamlit.io/
+
+## Deployment Steps
+
+1. Login with GitHub
+2. Click "Create App"
+3. Select:
+
+   * Repository name
+   * Branch: `main`
+   * Main file path: `app.py`
+4. Click "Deploy"
+
+After deployment, Streamlit generates a public application URL such as:
+
+```text
+https://suspicious-transaction-detection.streamlit.app/
+```
+
+---
+
+# Common Issues
+
+## Module Not Found Error
+
+Update dependencies:
+
+```bash
+pip freeze > requirements.txt
+```
+
+Push the updated file to GitHub.
+
+---
+
+## Git Push Error
+
+Run:
+
+```bash
+git pull origin main --allow-unrelated-histories
+git push origin main
+```
+
+---
+
+## Streamlit App Not Loading
+
+Check:
+
+* `requirements.txt` exists
+* `app.py` is in the root folder
+* model files are uploaded correctly
+
+---
+
+# Useful Commands
+
+| Command                   | Description              |
+| ------------------------- | ------------------------ |
+| `streamlit run app.py`    | Run the app locally      |
+| `git add .`               | Add files to Git         |
+| `git commit -m "message"` | Commit changes           |
+| `git push`                | Upload project to GitHub |
+
+---
+
+# Useful Links
+
+* Streamlit Documentation: https://docs.streamlit.io
+* GitHub: https://github.com
+* Python Downloads: https://www.python.org/downloads/windows/
+* Streamlit Community Cloud: https://share.streamlit.io
